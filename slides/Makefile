@@ -6,7 +6,12 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = BigDataUWSummer2018
 SOURCEDIR     = .
-BUILDDIR      = _build
+BUILDDIR      = ../../big_data_course_build/html/
+PDFBUILDDIR   = /tmp
+PDF           = ../manual.pdf
+ALLSPHINXOPTS = foo
+PDFBUILDDIR = 
+
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -14,7 +19,9 @@ help:
 
 .PHONY: help Makefile
 
+
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
