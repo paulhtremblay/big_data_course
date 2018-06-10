@@ -12,8 +12,10 @@ Henry Tremblay @paulhtremblay@gmail.com
 Course Schedule
 ---------------
 
+.. put in course schedule here
+
 Day 1 Agenda
-------------
+-------------
 
 1. Logistics
 
