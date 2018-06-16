@@ -5,17 +5,13 @@ Day 3
 ======
 
 Day 3 Agenda
-------------
+============
 
-1. Understand the importance of I/O 
-2. Underand the history of map/reduce
-
-Non big data Way to count words
-++++++++++++++++++++++++++++++++
-
-
-.. include:: architecuture_map_reduce.rst
+1. Underand the history of map/reduce
+2. Understand the two steps of map and reduce
+3. Understand the basic behind distributed jobs
+4. Understand the importance of using functional rather than state programming
+5. Be able to write map reduce jobs
+6. Understand the limitations of map/reduce
 
 
-
-.. :ref:`day2` <<  

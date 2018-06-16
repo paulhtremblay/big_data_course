@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Big Data, UW Summer 2018'
+project = 'Big Data, Xiangfei Education Group, UW Summer 2018'
 copyright = '2018, Henry Tremblay'
 author = 'Henry Tremblay'
 

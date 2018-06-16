@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 ====================================================
-Welcome to Big Data, UW Summer 2018's
+Big Data, Xiangfei Education Group UW Summer 2018
 ====================================================
 
 .. toctree::
@@ -14,6 +14,9 @@ Welcome to Big Data, UW Summer 2018's
    day1
    day2
    day3
+   day3_2.rst
+   day3_3.rst
+   day3_4.rst
 
 
 

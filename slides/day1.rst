@@ -4,20 +4,10 @@
 Day 1
 ======
 
-BIGDATA ???: Introduction to Data Engineering
-==============================================
-
 Henry Tremblay @paulhtremblay@gmail.com
 
-Course Schedule
----------------
-
-To be determined
-
-.. put in course schedule here
-
 Day 1 Agenda
--------------
+============
 
 1. Logistics
 
@@ -27,16 +17,25 @@ Day 1 Agenda
 
 4. Big Data concepts
 
+
+Course Schedule
+===============
+
+To be determined
+
+.. put in course schedule here
+
 Logistics
----------
+=========
 Room: ??
 
 Introduction
--------------
+============
+
 .. make this fun
 
 Course Objectives
------------------
+=================
 
    - Understand why big data is important
    - Understand the brief history behind big data
@@ -46,7 +45,7 @@ Course Objectives
    - Be able to use a variety of available technologies and understand how to make choices
 
 Big Data Concepts
-------------------
+=================
 
 - slow data is no data
 - big data does not fit on one machine
