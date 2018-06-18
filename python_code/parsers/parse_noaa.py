@@ -62,7 +62,7 @@ def parse_line_(line):
 def parse_line(line):
     return {
         'total_variable_characters':get_int_field(line, 1, 4),
-        'fixed_weather_station_usaf_master_station_catalog_identifier':get_int_field(line, 5, 10),
+        'fixed_weather_station_usaf_master_station_catalog_identifier':get_str_field(line, 5, 10),
         'fixed_weather_station_ncei_wban_identifier':get_int_field(line, 10, 15),
         'point_observation_date_time':create_date_time(line),
         'geophysical_point_observation_data_source_flag': get_str_field(line,
