@@ -4,12 +4,14 @@ bucket = 'paulhtremblay'
 my_bucket = s3.Bucket(bucket)
 from io import BytesIO
 from gzip import GzipFile
+<<<<<<< HEAD
 from parsers.parse_noaa import parse_line
 from parsers.stations_us_dict import d as us_stations_dict
 import pprint
 pp = pprint.PrettyPrinter(indent = 4)
 
 us_paths = []
+
 for i in my_bucket.objects.filter(Prefix='noaa/data/1990'):
     obj = s3.Object(bucket, i.key)
     content = s3.Object(bucket, i.key).get()
