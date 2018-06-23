@@ -35,7 +35,10 @@ def _field_with_divide_factor(line, start, stop, scale, required = True):
         return x/float(scale)
 
 def get_temp(line, start, stop, required = True):
-    return _field_with_divide_factor(line, start, stop, 10, required)
+    t =  _field_with_divide_factor(line, start, stop, 10, required)
+    if t == 999.9:
+        return None
+    return t
 
 def get_air_pressure(line, start, stop, required = True):
     return _field_with_divide_factor(line, start, stop, 10, required)
@@ -62,7 +65,7 @@ def parse_line_(line):
 def parse_line(line):
     return {
         'total_variable_characters':get_int_field(line, 1, 4),
-        'fixed_weather_station_usaf_master_station_catalog_identifier':get_int_field(line, 5, 10),
+        'fixed_weather_station_usaf_master_station_catalog_identifier':get_str_field(line, 5, 10),
         'fixed_weather_station_ncei_wban_identifier':get_int_field(line, 10, 15),
         'point_observation_date_time':create_date_time(line),
         'geophysical_point_observation_data_source_flag': get_str_field(line,

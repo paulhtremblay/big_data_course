@@ -1,0 +1,7 @@
+cat  ../data/us_stations_sample.txt | ./map_noaa_temp_by_state.py | sort | ./reduce_state_temps.py > temp_data/map_reduce_avg_temps_90.csv
+
+state_dict = {}
+with open("map_reduce/temp_data/map_reduce_avg_temps_90.csv", 'r') as read_obj:
+    csv_reader = csv.reader(read_obj)
+    for line in csv_reader:
+        state_dict[line[0]] = float(line[1])
