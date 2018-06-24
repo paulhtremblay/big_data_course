@@ -1,3 +1,4 @@
 .ipynb_checkpoints/*
 *.ipynb
 map_reduce/temp_data/*
+temp_data/*

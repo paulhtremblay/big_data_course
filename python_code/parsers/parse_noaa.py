@@ -31,6 +31,8 @@ def get_str_field(line, start, stop, required=True):
 def _field_with_divide_factor(line, start, stop, scale, required = True):
     assert isinstance(scale, int), "scale must be int"
     x = get_signed_int_field(line, start, stop, required)
+    if x == 0:
+        return x
     if x:
         return x/float(scale)
 
@@ -39,6 +41,12 @@ def get_temp(line, start, stop, required = True):
     if t == 999.9:
         return None
     return t
+
+def get_liquid_depth(line, start, stop, required = False):
+    l =  _field_with_divide_factor(line, start, stop, 10, required)
+    if l == 999.9:
+        return None
+    return l
 
 def get_air_pressure(line, start, stop, required = True):
     return _field_with_divide_factor(line, start, stop, 10, required)
@@ -63,7 +71,7 @@ def parse_line_(line):
     return (line, len(line))
 
 def parse_line(line):
-    return {
+    d =    {
         'total_variable_characters':get_int_field(line, 1, 4),
         'fixed_weather_station_usaf_master_station_catalog_identifier':get_str_field(line, 5, 10),
         'fixed_weather_station_ncei_wban_identifier':get_int_field(line, 10, 15),
@@ -114,6 +122,14 @@ def parse_line(line):
             105, 105, False),
         "geophysical_point_observation_additional_data_identifier":get_str_field(line, 106,
             108, False),
-        "liquid_precipitation_occurrence_identifier":get_str_field(line, 109,
-            111, False),
+        "liquid_precipitation_period_quantity_in_hours":None,
+        "liquid_precipitation_depth_dimension":None,
         }
+    liquid_precipitation_occurrence_identifier = get_str_field(line, 109,
+        111, False)
+    d['liquid_precipitation_occurrence_identifier'] = liquid_precipitation_occurrence_identifier
+    if liquid_precipitation_occurrence_identifier == 'AA1':
+        d["liquid_precipitation_period_quantity_in_hours"] = get_int_field(line, 112, 113, False)
+        d["liquid_precipitation_depth_dimension"] = get_liquid_depth(line, 114, 117, False)
+    return d
+
