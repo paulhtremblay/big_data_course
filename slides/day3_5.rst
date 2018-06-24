@@ -25,4 +25,7 @@ Now run the code:
   -input /user/hduser/hadoop_words/* -output /user/hduser/hadoop_words-output
 
  
-Class Exercise: Do the same exercise, but use the Gutenberg ? as your input file
+Class Exercise
+===============
+
+Count the number of words in David Copperfied (found here: http://www.gutenberg.org/files/43111/)

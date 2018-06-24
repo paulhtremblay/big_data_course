@@ -18,8 +18,11 @@ Big Data, Xiangfei Education Group UW Summer 2018
    day3_3.rst
    day3_4.rst
    day3_5.rst
-
-
+   day4.rst
+   lesson4_2.rst
+   lesson4_3.rst
+   lesson4_4.rst
+   lesson4_5.rst
 
 ==================
 Indices and tables

@@ -6,7 +6,6 @@ import sys
 current_state = None
 current_state_count = 0
 current_state_temp = 0
-word = None
 
 def calc_avg(temp, count):
     if count == 0:
