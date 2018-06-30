@@ -1,4 +1,4 @@
-..  _day3_3:
+..  _lesson3_3:
 
 =================================
 Day 3 (3): Map/Reduce Word Count

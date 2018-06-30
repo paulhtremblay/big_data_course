@@ -11,14 +11,16 @@ Big Data, Xiangfei Education Group UW Summer 2018
    :maxdepth: 2
    :caption: Contents:
 
-   day1
-   day2
-   day3
-   day3_2.rst
-   day3_3.rst
-   day3_4.rst
-   day3_5.rst
-   day4.rst
+   introduction
+   lesson2
+   lesson2_2
+   lesson2_3
+   lesson3
+   lesson3_2.rst
+   lesson3_3.rst
+   lesson3_4.rst
+   lesson3_5.rst
+   lesson4.rst
    lesson4_2.rst
    lesson4_3.rst
    lesson4_4.rst

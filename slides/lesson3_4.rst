@@ -1,4 +1,4 @@
-..  _day3_4:
+..  _lesson3_4:
 
 =================================
 Day 3 (4): Code and Bash Example
