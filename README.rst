@@ -16,3 +16,5 @@ You will have to recreate the build docs:
 3. git clone git@github.com:paulhtremblay/big_data_course.git html
 4. cd  html
 5. git checkout gh-pages
+
+tar --exclude=python_code/temp_data  -cvzf  python_code.tar.gz python_code/

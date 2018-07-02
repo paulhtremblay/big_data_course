@@ -15,3 +15,5 @@ In order to answer the above question, we need to create two map and reduce jobs
 4. Use the dictionary from step (3) to create a second mapper, with the key being the temperature range, 
    and the values the rainfall
 5. Create a reducer to average the rainfall
+
+Fix!<< :ref:`lesson2_2` | :ref:`lesson5_2`  >>

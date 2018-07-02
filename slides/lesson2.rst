@@ -1,10 +1,10 @@
 ..  _lesson2:
 
-======
-Day 2
-======
+=========
+Lesson 1
+=========
 
-Day 2 Agenda
+Agenda
 ------------
 
 1. Set up your computer to enable Azure VM
@@ -28,3 +28,5 @@ Setup Client
 
 1. wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/big_data_course_tools-.2.tar.gz
 
+
+| :ref:`lesson2_2`  >>

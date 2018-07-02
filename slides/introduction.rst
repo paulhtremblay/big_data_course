@@ -1,12 +1,12 @@
 ..  _day1:
 
-======
-Day 1
-======
+=============
+Introduction
+=============
 
 Henry Tremblay @paulhtremblay@gmail.com
 
-Day 1 Agenda
+Agenda
 ============
 
 1. Logistics

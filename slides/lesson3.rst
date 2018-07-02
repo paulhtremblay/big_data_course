@@ -1,10 +1,10 @@
 ..  _lesson3:
 
-======
-Day 3
-======
+==========
+Lesson 3
+==========
 
-Day 3 Agenda
+Agenda
 ============
 
 1. Underand the history of map/reduce

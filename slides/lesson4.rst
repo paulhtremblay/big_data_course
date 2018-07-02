@@ -1,10 +1,10 @@
 ..  _lesson4:
 
-======
-Day 4
-======
+==========
+Lesson 4
+==========
 
-Day 4 Agenda
+Agenda
 ============
 
 1. Understand the format of the NOAA data set, which we will use through this course

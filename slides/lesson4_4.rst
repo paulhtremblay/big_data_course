@@ -4,8 +4,8 @@
 Lesson 4 (4)
 =============
 
-Using Map Reduce to find the average tempeartures for each state
-================================================================
+Using Map Reduce to find the average tempeartures for each state (2)
+=====================================================================
 
 The reducer
 +++++++++++
@@ -23,6 +23,8 @@ Steps to create a reducer:
 .. literalinclude:: ../python_code/map_reduce/reduce_state_temps.py
    :language: python
    :linenos:
+
+   
 
 Questions
 =========
