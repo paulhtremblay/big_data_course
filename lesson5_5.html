@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Install… &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
+    <title>Mapper For stations &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,17 +15,17 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Install…" href="lesson2_4.html" />
-    <link rel="prev" title="Install…" href="lesson2_2.html" /> 
+    <link rel="next" title="Reducer For stations" href="lesson5_6.html" />
+    <link rel="prev" title="Illustration (3)" href="lesson5_4.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="lesson2_2.html" title="Install…"
+          <a href="lesson5_4.html" title="Illustration (3)"
              accesskey="P">previous</a> |
-          <a href="lesson2_4.html" title="Install…"
+          <a href="lesson5_6.html" title="Reducer For stations"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -41,11 +41,54 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="install">
-<span id="lesson2-3"></span><h1>Install…<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
-<p>Open up the executable file and execute it.</p>
-<img alt="_images/install1.png" src="_images/install1.png" />
-<p>&lt;&lt; <a class="reference internal" href="lesson2_2.html#lesson2-2"><span class="std std-ref">Install…</span></a> | <a class="reference internal" href="lesson2_4.html#lesson2-4"><span class="std std-ref">Install…</span></a>  &gt;&gt;</p>
+  <div class="section" id="mapper-for-stations">
+<span id="lesson5-5"></span><h1>Mapper For stations<a class="headerlink" href="#mapper-for-stations" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;mapper.py&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">parsers.parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
+<span class="kn">from</span> <span class="nn">parsers.stations_us_dict</span> <span class="kn">import</span> <span class="n">d</span> <span class="k">as</span> <span class="n">us_stations_dict</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">the_dict</span> <span class="o">=</span> <span class="n">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">the_dict</span><span class="p">[</span><span class="s1">&#39;air_temperature_observation_air_temperature&#39;</span><span class="p">]</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">us_stations_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span>
+        <span class="n">the_dict</span><span class="p">[</span><span class="s1">&#39;fixed_weather_station_usaf_master_station_catalog_identifier&#39;</span><span class="p">]),</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;st&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;AK&#39;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;HI&#39;</span>  <span class="ow">or</span> <span class="n">temp</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">station_id</span> <span class="o">=</span> <span class="n">the_dict</span><span class="p">[</span><span class="s1">&#39;fixed_weather_station_usaf_master_station_catalog_identifier&#39;</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{station_id}</span><span class="se">\t</span><span class="s1">{temp}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">station_id</span> <span class="o">=</span> <span class="n">station_id</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p>&lt;&lt; <a class="reference internal" href="lesson5_4.html#lesson5-4"><span class="std std-ref">Illustration (3)</span></a> | <a class="reference internal" href="lesson5_6.html#lesson5-6"><span class="std std-ref">Reducer For stations</span></a>  &gt;&gt;</p>
 </div>
 
 
@@ -60,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2.html">Lesson 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_2.html">Install…</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Install…</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_3.html">Install…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_4.html">Install…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_5.html">Install…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_6.html">Install…</a></li>
@@ -87,6 +130,10 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson5_2.html">Illustration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_3.html">Illustration (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_4.html">Illustration (3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mapper For stations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_6.html">Reducer For stations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_7.html">Mapper for temperature ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_8.html">Reducer for temperature ranges</a></li>
 </ul>
 
           <div role="search">
@@ -107,16 +154,16 @@
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
-            <a href="lesson2_2.html" title="Install…"
+            <a href="lesson5_4.html" title="Illustration (3)"
               >previous</a> |
-            <a href="lesson2_4.html" title="Install…"
+            <a href="lesson5_6.html" title="Reducer For stations"
               >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
           <div role="note" aria-label="source link">
               <br/>
-              <a href="_sources/lesson2_3.rst.txt"
+              <a href="_sources/lesson5_5.rst.txt"
                 rel="nofollow">Show Source</a>
           </div>
         </div>
