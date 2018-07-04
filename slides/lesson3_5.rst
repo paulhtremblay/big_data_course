@@ -37,3 +37,5 @@ Class Exercise
 ===============
 
 Count the number of words in David Copperfied (found here: http://www.gutenberg.org/files/43111/)
+
+<< :ref:`lesson3_4` | :ref:`lesson4`  >>

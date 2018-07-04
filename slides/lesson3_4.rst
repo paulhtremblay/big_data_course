@@ -25,3 +25,5 @@ Questions
 
 1. Why do I need the sort command when I run this locally?
 2. Why do I *not* need to sort when running on Hadoop?
+
+<< :ref:`lesson3_3` | :ref:`lesson3_5`  >>

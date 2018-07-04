@@ -16,4 +16,4 @@ In order to answer the above question, we need to create two map and reduce jobs
    and the values the rainfall
 5. Create a reducer to average the rainfall
 
-Fix!<< :ref:`lesson2_2` | :ref:`lesson5_2`  >>
+<< :ref:`lesson4_5` | :ref:`lesson5_2`  >>

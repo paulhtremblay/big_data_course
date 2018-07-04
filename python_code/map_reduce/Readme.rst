@@ -11,7 +11,7 @@ For by state ananysis
  import csv
 
  state_dict = {}
- with open("temp_data/avg_state_temps.csv", 'r') as read_obj:
+ with open("avg_state_temps.csv", 'r') as read_obj:
     csv_reader = csv.reader(read_obj)
     for line in csv_reader:
         state_dict[line[0]] = float(line[1])
@@ -29,6 +29,8 @@ For Range analysis
  with open("avg_station_temps.csv", 'r') as read_obj:
     csv_reader = csv.reader(read_obj)
     values = [float(x[1]) for x in csv_reader]
+ p = histogram(values)
+ show(p)
 
 .. comment
 
@@ -44,7 +46,9 @@ For Range analysis
     return (float(fields[0]), float(fields[1]))
 
  moisture = sorted(moisture, key = my_sort)
- p = bar(labels=[x[0] for x in moisture], nums = [float(x[1]) for x in moisture])
+ p = bar(labels=[x[0] for x in moisture], nums = [float(x[1]) for x in moisture], title="Moisture by range")
+ p.xaxis.major_label_orientation = "vertical"
+ show(p)
 
 For Hadoop
 ==========

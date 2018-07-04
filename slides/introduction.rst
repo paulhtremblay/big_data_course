@@ -57,4 +57,4 @@ Big Data Concepts
 
 
 
-.. >>  :ref:`day2`
+:ref:`lesson2`  >>

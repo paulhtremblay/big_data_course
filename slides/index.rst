@@ -41,6 +41,10 @@ Big Data, Xiangfei Education Group UW Summer 2018
    lesson5_2
    lesson5_3
    lesson5_4
+   lesson5_5
+   lesson5_6
+   lesson5_7
+   lesson5_8
 
 ==================
 Indices and tables

@@ -27,3 +27,5 @@ Questions
 
 1. What is the difference between this example and the word count example?
 2. What are the similarities?
+
+<< :ref:`lesson4_2` | :ref:`lesson4_4`  >>

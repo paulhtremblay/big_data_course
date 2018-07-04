@@ -20,3 +20,5 @@ Questions
 
 1. What did you like most about Jupyter?
 1. What did you like least about Jupyter?
+
+<< :ref:`lesson4_4` | :ref:`lesson5_intro`  >>

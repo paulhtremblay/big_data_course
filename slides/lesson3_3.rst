@@ -20,4 +20,5 @@ Questions
 2. How does map/reduce decide on what to shuffle? 
 
 
+<< :ref:`lesson3_2` | :ref:`lesson3_4`  >>
 

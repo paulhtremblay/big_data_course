@@ -32,3 +32,5 @@ Questions
 1. What is the difference between this example and the word count example?
 2. What are the similarities?
 3. Would this example scale well (would it run fast for a really big data set)?
+
+<< :ref:`lesson4_3` | :ref:`lesson4_5`  >>
