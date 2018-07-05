@@ -1,7 +1,7 @@
 #THIS IS A STATE AND WON'T WORK IN HADOOP OR DISTRUBTED SYSTEMS!
 word_count = {}
 # ^^^^^^^^^^^^^^
-with open('../data/hadoop_words.txt', 'r') as read_obj:
+with open('simple_work_count_words.txt', 'r') as read_obj:
     line = 'init'
     while line:
         line = read_obj.readline()

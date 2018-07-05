@@ -8,6 +8,7 @@ Reducer for temperature ranges
    :language: python
    :linenos:
 
+
 << :ref:`lesson5_7` | :ref:`lesson5_9`  >>
 
 
