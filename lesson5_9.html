@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Day 3 (2): Simple word count &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
+    <title>Summary Map Reduce &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,17 +15,17 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 3 (3): Map/Reduce Word Count" href="lesson3_3.html" />
-    <link rel="prev" title="Lesson 3" href="lesson3.html" /> 
+    <link rel="next" title="Input/Output" href="lesson5_10.html" />
+    <link rel="prev" title="Reducer for temperature ranges" href="lesson5_8.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="lesson3.html" title="Lesson 3"
+          <a href="lesson5_8.html" title="Reducer for temperature ranges"
              accesskey="P">previous</a> |
-          <a href="lesson3_3.html" title="Day 3 (3): Map/Reduce Word Count"
+          <a href="lesson5_10.html" title="Input/Output"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -41,46 +41,48 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="day-3-2-simple-word-count">
-<span id="lesson3-2"></span><h1>Day 3 (2): Simple word count<a class="headerlink" href="#day-3-2-simple-word-count" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="non-big-data-way-to-count-words">
-<h2>Non big data Way to count words<a class="headerlink" href="#non-big-data-way-to-count-words" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#THIS IS A STATE AND WON&#39;T WORK IN HADOOP OR DISTRUBTED SYSTEMS!</span>
-<span class="n">word_count</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="c1"># ^^^^^^^^^^^^^^</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;simple_work_count_words.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
-    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;init&#39;</span>
-    <span class="k">while</span> <span class="n">line</span><span class="p">:</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="n">read_obj</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-        <span class="n">word_list</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">word_count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">word_count</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{word}:{num}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span> <span class="o">=</span> <span class="n">key</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">word_count</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
-</pre></div>
-</td></tr></table></div>
+  <div class="section" id="summary-map-reduce">
+<span id="lesson5-9"></span><h1>Summary Map Reduce<a class="headerlink" href="#summary-map-reduce" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="agenda">
+<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
+<p>Learn that THE SLOWEST PART OF JOBS IN BIG DATA IS INPUT/OUTPUT!</p>
 </div>
-<div class="section" id="questions">
-<h2>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>2004, Google developed a proprietary project, solving 3 problems:</li>
+</ul>
+<p>The three main problems solved were:</p>
 <ol class="arabic simple">
-<li>Why won’t this solution work with big data?</li>
+<li>Parallelization — how to parallelize the computation</li>
+<li>Distribution — how to distribute the data</li>
+<li>Fault-tolerance — how to handle component failure</li>
 </ol>
-<p>&lt;&lt; <a class="reference internal" href="lesson3.html#lesson3"><span class="std std-ref">Lesson 3</span></a> | <a class="reference internal" href="lesson3_3.html#lesson3-3"><span class="std std-ref">Day 3 (3): Map/Reduce Word Count</span></a>  &gt;&gt;</p>
+<ul class="simple">
+<li>2006, Hadoop makes map/reduce widely available.</li>
+<li>Facebook and others begin using it</li>
+</ul>
+</div>
+<div class="section" id="advantages">
+<h2>Advantages<a class="headerlink" href="#advantages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>scalable,</li>
+<li>able to work with unstructured code</li>
+<li>able to work on commodity (cheap) machines</li>
+<li><em>relatively</em> easy to write jobs (as opposed to previously)</li>
+</ul>
+</div>
+<div class="section" id="disadvantages">
+<h2>Disadvantages<a class="headerlink" href="#disadvantages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>difficult to write complex jobs</li>
+<li>difficult to write jobs with multi steps</li>
+<li>inefficient for jobs with multiple steps</li>
+<li>THE SLOWEST PART OF JOBS IN BIG DATA IS INPUT/OUTPUT (I/O), but a map/reduce job with
+multiple steps has to write to a file system multiple times. This is very inefficient!</li>
+<li>Map Reduce has been replaced by other technologies</li>
+</ul>
+<p>&lt;&lt; <a class="reference internal" href="lesson5_8.html#lesson5-8"><span class="std std-ref">Reducer for temperature ranges</span></a> | <a class="reference internal" href="lesson5_10.html#lesson5-10"><span class="std std-ref">Input/Output</span></a>  &gt;&gt;</p>
 </div>
 </div>
 
@@ -110,11 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson2_14.html">Run X2GO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_15.html">Run X2GO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 3 (2): Simple word count</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#non-big-data-way-to-count-words">Non big data Way to count words</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#questions">Questions</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Day 3 (2): Simple word count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Day 3 (3): Map/Reduce Word Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_4.html">Day 3 (4): Code and Bash Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_5.html">Day 3 (5): Simple word count with Hadoop</a></li>
@@ -131,9 +129,14 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson5_6.html">Reducer For stations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_7.html">Mapper for temperature ranges</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_8.html">Reducer for temperature ranges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5_9.html">Summary Map Reduce</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Summary Map Reduce</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#agenda">Agenda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#history">History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advantages">Advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disadvantages">Disadvantages</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
 </ul>
 
@@ -155,16 +158,16 @@
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
-            <a href="lesson3.html" title="Lesson 3"
+            <a href="lesson5_8.html" title="Reducer for temperature ranges"
               >previous</a> |
-            <a href="lesson3_3.html" title="Day 3 (3): Map/Reduce Word Count"
+            <a href="lesson5_10.html" title="Input/Output"
               >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
           <div role="note" aria-label="source link">
               <br/>
-              <a href="_sources/lesson3_2.rst.txt"
+              <a href="_sources/lesson5_9.rst.txt"
                 rel="nofollow">Show Source</a>
           </div>
         </div>

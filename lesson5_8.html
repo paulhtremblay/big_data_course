@@ -15,6 +15,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Summary Map Reduce" href="lesson5_9.html" />
     <link rel="prev" title="Mapper for temperature ranges" href="lesson5_7.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
@@ -24,6 +25,8 @@
         <div class="rel" role="navigation" aria-label="related navigation">
           <a href="lesson5_7.html" title="Mapper for temperature ranges"
              accesskey="P">previous</a> |
+          <a href="lesson5_9.html" title="Summary Map Reduce"
+             accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -105,15 +108,7 @@
 63
 64
 65
-66
-67
-68
-69
-70
-71
-72
-73
-74</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+66</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="sd">&quot;&quot;&quot;mapper.py&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -123,26 +118,18 @@
 <span class="kn">import</span> <span class="nn">pprint</span>
 <span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">parsers.parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
-<span class="kn">from</span> <span class="nn">parsers.stations_us_dict</span> <span class="kn">import</span> <span class="n">d</span> <span class="k">as</span> <span class="n">us_stations_dict</span>
+<span class="kn">from</span> <span class="nn">parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
+<span class="kn">from</span> <span class="nn">stations_us_dict</span> <span class="kn">import</span> <span class="n">d</span> <span class="k">as</span> <span class="n">us_stations_dict</span>
 
 
 <span class="c1"># Get info from file we created in last map/reduct</span>
 <span class="c1"># This file is small, so we can read it all in on one node</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../temp_data/stations_avg.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;stations_avg.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
         <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">read_obj</span><span class="p">)</span>
         <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">]</span>
 
 <span class="c1"># divide the numbers up into ranges. numpy does this nicely!</span>
 <span class="n">hist</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-
-<span class="c1"># Let&#39;s print out the &quot;edges&quot;, or ranges, for later</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../temp_data/ranges.csv&quot;</span> <span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">write_obj</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">edges</span><span class="p">)):</span>
-        <span class="n">write_obj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;{counter},{edge}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span><span class="p">,</span>
-            <span class="n">edge</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
-
 
 <span class="k">def</span> <span class="nf">find_range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)):</span>
@@ -153,7 +140,7 @@
 
 <span class="c1"># create a range dict for each station</span>
 <span class="n">range_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../temp_data/stations_avg.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;stations_avg.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
         <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">read_obj</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -189,7 +176,7 @@
 
 </pre></div>
 </td></tr></table></div>
-<p>&lt;&lt; <a class="reference internal" href="lesson5_7.html#lesson5-7"><span class="std std-ref">Mapper for temperature ranges</span></a> | <span class="xref std std-ref">lesson5_9</span>  &gt;&gt;</p>
+<p>&lt;&lt; <a class="reference internal" href="lesson5_7.html#lesson5-7"><span class="std std-ref">Mapper for temperature ranges</span></a> | <a class="reference internal" href="lesson5_9.html#lesson5-9"><span class="std std-ref">Summary Map Reduce</span></a>  &gt;&gt;</p>
 </div>
 
 
@@ -235,6 +222,9 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson5_6.html">Reducer For stations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_7.html">Mapper for temperature ranges</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reducer for temperature ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_9.html">Summary Map Reduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
 </ul>
 
           <div role="search">
@@ -257,6 +247,8 @@
           <div role="navigation" aria-label="related navigaton">
             <a href="lesson5_7.html" title="Mapper for temperature ranges"
               >previous</a> |
+            <a href="lesson5_9.html" title="Summary Map Reduce"
+              >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
