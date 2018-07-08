@@ -20,7 +20,6 @@ Questions
 =========
 
 1. What is the main advantage of lazy processing? 
-  
 
 << :ref:`lesson5_12` | :ref:`lesson6`  >>
 
