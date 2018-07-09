@@ -37,6 +37,7 @@ Actions
 =======
 
 - collect
+- count
 - countByValue
 - reduce
 - fold

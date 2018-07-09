@@ -8,10 +8,10 @@ Map
 ===
 
 For the David Coppefied text, put a space between all words and punctuation. 
-For example: change 
+For example::  
 
-"big." will become "big ." 
-"big!" will become "big !" 
+ big. =>  "big ." 
+ big! => "big !" 
  
 
 << :ref:`lesson6_6` | :ref:`lesson6_8`  >>
