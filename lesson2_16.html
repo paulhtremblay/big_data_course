@@ -14,13 +14,19 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Lesson 3" href="lesson3.html" />
+    <link rel="prev" title="Run X2GO" href="lesson2_15.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
+          <a href="lesson2_15.html" title="Run X2GO"
+             accesskey="P">previous</a> |
+          <a href="lesson3.html" title="Lesson 3"
+             accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -45,13 +51,13 @@
 <img alt="_images/x2go_logging_in.png" src="_images/x2go_logging_in.png" />
 <div class="section" id="install-needed-software">
 <h2>Install Needed Software<a class="headerlink" href="#install-needed-software" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">s3</span><span class="o">-</span><span class="n">us</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mf">2.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paulhtremblaypublic</span><span class="o">/</span><span class="n">python_code</span><span class="o">/</span><span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mf">2.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="k">class</span>
+<span class="nc">source</span> <span class="n">activate</span> <span class="k">class</span>
+<span class="nc">conda</span> <span class="n">install</span> <span class="n">bokeh</span> <span class="n">pyshp</span> <span class="n">Shapely</span> <span class="n">jupyter</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">s3</span><span class="o">-</span><span class="n">us</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mf">2.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paulhtremblaypublic</span><span class="o">/</span><span class="n">python_code</span><span class="o">/</span><span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mf">21.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 <span class="n">tar</span> <span class="o">-</span><span class="n">xvzf</span> <span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mf">2.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 <span class="n">cd</span> <span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mi">2</span><span class="o">/</span>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
-<span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="k">class</span>
-<span class="nc">source</span> <span class="n">activate</span> <span class="k">class</span>
-<span class="nc">conda</span> <span class="n">install</span> <span class="n">bokeh</span> <span class="n">pyshp</span> <span class="n">Shapely</span>
 </pre></div>
 </div>
 <p>&lt;&lt; <a class="reference internal" href="lesson2_15.html#lesson2-15"><span class="std std-ref">Run X2GO</span></a> | <a class="reference internal" href="lesson3.html#lesson3"><span class="std std-ref">Lesson 3</span></a>  &gt;&gt;</p>
@@ -66,7 +72,7 @@
         <div class="sidebar">
           <h3>Table Of Contents</h3>
           <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2.html">Lesson 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_2.html">Install…</a></li>
@@ -83,6 +89,10 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson2_13.html">Run X2GO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_14.html">Run X2GO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_15.html">Run X2GO</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Run X2GO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-needed-software">Install Needed Software</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Day 3 (2): Simple word count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Day 3 (3): Map/Reduce Word Count</a></li>
@@ -93,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson4_3.html">Lesson 4 (3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_4.html">Lesson 4 (4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_5.html">Lesson 4 (5)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5_intro.html">Lesson 5 Map Reduce with Multiple Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5.html">Lesson 5 Map Reduce with Multiple Steps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_2.html">Illustration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_3.html">Illustration (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_4.html">Illustration (3)</a></li>
@@ -101,6 +111,25 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson5_6.html">Reducer For stations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_7.html">Mapper for temperature ranges</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_8.html">Reducer for temperature ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_9.html">Summary Map Reduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_12.html">A Short Intro to Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_13.html">A Short Intro to Lazy Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6.html">Lesson 6 Introduction to Spark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_2.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_3.html">simple word count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_4.html">Architecture behind simple word count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_5.html">Anatomy Behind A Spark Job</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_6.html">Anatomy Behind A Spark Job (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_7.html">Class Exercises (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_8.html">Class Exercises (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_9.html">Class Exercises (3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_10.html">Class Exercises (4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_11.html">Class Exercises (5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_12.html">Class Exercises (6)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_13.html">Class Exercises (7)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson6_14.html">Questions</a></li>
 </ul>
 
           <div role="search">
@@ -121,6 +150,10 @@
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
+            <a href="lesson2_15.html" title="Run X2GO"
+              >previous</a> |
+            <a href="lesson3.html" title="Lesson 3"
+              >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
