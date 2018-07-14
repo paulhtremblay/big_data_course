@@ -10,4 +10,4 @@ Questions
 4. What are the biggest bottlenecks (slowest parts) in the Spark pipelines we have processed?
 
 
-<< :ref:`lesson6_13` | :ref:`lesson6_15`  >>
+<< :ref:`lesson6_13` | :ref:`lesson7`  >>
