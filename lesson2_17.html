@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Install: Choosing Languange &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
+    <title>Configure Image &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,17 +15,17 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Install: Accpeting License" href="lesson2_4.html" />
-    <link rel="prev" title="Downloading X2GO Client" href="lesson2_2.html" /> 
+    <link rel="next" title="Lesson 3" href="lesson3.html" />
+    <link rel="prev" title="Run X2GO: Putting in Password" href="lesson2_16.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="lesson2_2.html" title="Downloading X2GO Client"
+          <a href="lesson2_16.html" title="Run X2GO: Putting in Password"
              accesskey="P">previous</a> |
-          <a href="lesson2_4.html" title="Install: Accpeting License"
+          <a href="lesson3.html" title="Lesson 3"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -41,11 +41,49 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="install-choosing-languange">
-<span id="lesson2-3"></span><h1>Install: Choosing Languange<a class="headerlink" href="#install-choosing-languange" title="Permalink to this headline">¶</a></h1>
-<p>Open up the executable file and execute it.</p>
-<img alt="_images/install1.png" src="_images/install1.png" />
-<p>&lt;&lt; <a class="reference internal" href="lesson2_2.html#lesson2-2"><span class="std std-ref">Downloading X2GO Client</span></a> | <a class="reference internal" href="lesson2_4.html#lesson2-4"><span class="std std-ref">Install: Accpeting License</span></a>  &gt;&gt;</p>
+  <div class="section" id="configure-image">
+<span id="lesson2-17"></span><h1>Configure Image<a class="headerlink" href="#configure-image" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-needed-software">
+<h2>Install Needed Software<a class="headerlink" href="#install-needed-software" title="Permalink to this headline">¶</a></h2>
+<p>Open a terminal</p>
+<img alt="_images/DSVM_fresh.png" src="_images/DSVM_fresh.png" />
+<p>Create an environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="k">class</span>
+<span class="nc">source</span> <span class="n">activate</span> <span class="k">class</span>
+</pre></div>
+</div>
+<p>Install basic libraries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">bokeh</span> <span class="n">pyshp</span> <span class="n">Shapely</span> <span class="n">jupyter</span>
+</pre></div>
+</div>
+<p>Install my graphing library. Instead of ‘x’, use the latest version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">s3</span><span class="o">-</span><span class="n">us</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mf">2.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paulhtremblaypublic</span><span class="o">/</span><span class="n">python_code</span><span class="o">/</span><span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mi">2</span><span class="n">x</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">xvzf</span> <span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mf">2.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">cd</span> <span class="n">python_big_data_tools</span><span class="o">-.</span><span class="mi">2</span><span class="n">x</span><span class="o">/</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Setup the environmental variables</p>
+<p>First open up gedit editor. (You can use another editor if you like). Choose the open option.
+<em>Press Ctrl h</em>. You will now see the hidden files.</p>
+<img alt="_images/gedit_bash.png" src="_images/gedit_bash.png" />
+<p>Open up .bashrc, and put the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+export PYSPARK_PYTHON=~/.conda/envs/class/bin/python
+</pre></div>
+</div>
+<p>Get the python code for this course:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span>
+<span class="n">wget</span><span class="p">:</span><span class="o">//</span><span class="n">s3</span><span class="o">-</span><span class="n">us</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mf">2.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paulhtremblaypublic</span><span class="o">/</span><span class="n">python_code</span><span class="o">/</span><span class="n">python_code</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>Make a workspace directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span>
+<span class="n">mkdir</span> <span class="n">workspace</span>
+</pre></div>
+</div>
+<p>&lt;&lt; <a class="reference internal" href="lesson2_16.html#lesson2-16"><span class="std std-ref">Run X2GO: Putting in Password</span></a> | <a class="reference internal" href="lesson3.html#lesson3"><span class="std std-ref">Lesson 3</span></a>  &gt;&gt;</p>
+</div>
 </div>
 
 
@@ -60,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2.html">Lesson 2: Setting Up Your Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_2.html">Downloading X2GO Client</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Install: Choosing Languange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_3.html">Install: Choosing Languange</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_4.html">Install: Accpeting License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_5.html">Install: Choosing Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_6.html">Install: Choosing Location</a></li>
@@ -74,7 +112,10 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson2_14.html">Run X2GO: Choosing XFCE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_15.html">Run X2GO: Clicking Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_16.html">Run X2GO: Putting in Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_17.html">Configure Image</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configure Image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-needed-software">Install Needed Software</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Day 3 (2): Simple word count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Day 3 (3): Map/Reduce Word Count</a></li>
@@ -140,16 +181,16 @@
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
-            <a href="lesson2_2.html" title="Downloading X2GO Client"
+            <a href="lesson2_16.html" title="Run X2GO: Putting in Password"
               >previous</a> |
-            <a href="lesson2_4.html" title="Install: Accpeting License"
+            <a href="lesson3.html" title="Lesson 3"
               >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
           <div role="note" aria-label="source link">
               <br/>
-              <a href="_sources/lesson2_3.rst.txt"
+              <a href="_sources/lesson2_17.rst.txt"
                 rel="nofollow">Show Source</a>
           </div>
         </div>

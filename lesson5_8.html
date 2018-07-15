@@ -15,7 +15,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Summary Map Reduce" href="lesson5_9.html" />
+    <link rel="next" title="Executing and examining the Code" href="lesson5_8_1.html" />
     <link rel="prev" title="Mapper for temperature ranges" href="lesson5_7.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
@@ -25,7 +25,7 @@
         <div class="rel" role="navigation" aria-label="related navigation">
           <a href="lesson5_7.html" title="Mapper for temperature ranges"
              accesskey="P">previous</a> |
-          <a href="lesson5_9.html" title="Summary Map Reduce"
+          <a href="lesson5_8_1.html" title="Executing and examining the Code"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -76,107 +76,43 @@
 31
 32
 33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot;mapper.py&quot;&quot;&quot;</span>
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">import</span> <span class="nn">pprint</span>
-<span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1">#This is station, but map/reduce, because reducer will distribute it correctly.</span>
+<span class="n">current_station</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">current_station_moisture</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">current_station_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="kn">from</span> <span class="nn">parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
-<span class="kn">from</span> <span class="nn">stations_us_dict</span> <span class="kn">import</span> <span class="n">d</span> <span class="k">as</span> <span class="n">us_stations_dict</span>
-
-
-<span class="c1"># Get info from file we created in last map/reduct</span>
-<span class="c1"># This file is small, so we can read it all in on one node</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;stations_avg.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
-        <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">read_obj</span><span class="p">)</span>
-        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">]</span>
-
-<span class="c1"># divide the numbers up into ranges. numpy does this nicely!</span>
-<span class="n">hist</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">find_range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="s1">&#39;{start} =&gt; {end}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">start</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">)),</span>
-                    <span class="n">end</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">)))</span>
-
-<span class="c1"># create a range dict for each station</span>
-<span class="n">range_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;stations_avg.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_obj</span><span class="p">:</span>
-        <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">read_obj</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">range_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_range</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">range_dict = {</span>
-<span class="sd">    &#39;747750&#39;: &#39;18.8 =&gt; 23.3&#39;,</span>
-<span class="sd">    &#39;747770&#39;: &#39;18.8 =&gt; 23.3&#39;,</span>
-<span class="sd">    &#39;747804&#39;: &#39;18.8 =&gt; 23.3&#39;,</span>
-<span class="sd">    &#39;747810&#39;: &#39;18.8 =&gt; 23.3&#39;,</span>
-<span class="sd">    &#39;747880&#39;: &#39;23.3 =&gt; 27.7&#39;,</span>
-<span class="sd">    &#39;747900&#39;: &#39;14.4 =&gt; 18.8&#39;,</span>
-<span class="sd">    ....</span>
-<span class="sd">}</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="c1">#END OF PRELIMINARTY CODE (done just once)</span>
+<span class="k">def</span> <span class="nf">calc_avg</span><span class="p">(</span><span class="n">moisture</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">moisture</span><span class="o">/</span><span class="n">count</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-        <span class="k">continue</span>
-    <span class="n">the_dict</span> <span class="o">=</span> <span class="n">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-    <span class="n">moisture</span> <span class="o">=</span> <span class="n">the_dict</span><span class="p">[</span><span class="s1">&#39;liquid_precipitation_depth_dimension&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">moisture</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">moisture</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">continue</span>
-    <span class="n">the_id</span> <span class="o">=</span> <span class="n">range_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">the_dict</span><span class="p">[</span><span class="s1">&#39;fixed_weather_station_usaf_master_station_catalog_identifier&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">the_id</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">continue</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{the_id}</span><span class="se">\t</span><span class="s1">{moisture}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">the_id</span> <span class="o">=</span> <span class="n">the_id</span><span class="p">,</span> <span class="n">moisture</span> <span class="o">=</span> <span class="n">moisture</span><span class="p">))</span>
+    <span class="n">station</span><span class="p">,</span> <span class="n">moisture</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">moisture</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">moisture</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">current_station</span> <span class="o">==</span> <span class="n">station</span><span class="p">:</span>
+        <span class="n">current_station_moisture</span> <span class="o">+=</span> <span class="n">moisture</span>
+        <span class="n">current_station_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_station</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{current_station},{moisture}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">current_station</span> <span class="o">=</span> <span class="n">current_station</span><span class="p">,</span>
+                <span class="n">moisture</span> <span class="o">=</span> <span class="n">calc_avg</span><span class="p">(</span><span class="n">current_station_moisture</span><span class="p">,</span> <span class="n">current_station_count</span><span class="p">)))</span>
+        <span class="n">current_station_moisture</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">current_station</span> <span class="o">=</span> <span class="n">station</span>
+        <span class="n">current_station_count</span> <span class="o">=</span> <span class="mi">0</span>
 
+<span class="k">if</span> <span class="n">current_station</span> <span class="o">==</span> <span class="n">station</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{current_station},{moisture}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">current_station</span> <span class="o">=</span> <span class="n">current_station</span><span class="p">,</span>
+                <span class="n">moisture</span> <span class="o">=</span> <span class="n">calc_avg</span><span class="p">(</span><span class="n">current_station_moisture</span><span class="p">,</span> <span class="n">current_station_count</span><span class="p">)))</span>
 </pre></div>
 </td></tr></table></div>
-<p>&lt;&lt; <a class="reference internal" href="lesson5_7.html#lesson5-7"><span class="std std-ref">Mapper for temperature ranges</span></a> | <a class="reference internal" href="lesson5_9.html#lesson5-9"><span class="std std-ref">Summary Map Reduce</span></a>  &gt;&gt;</p>
+<p>&lt;&lt; <a class="reference internal" href="lesson5_7.html#lesson5-7"><span class="std std-ref">Mapper for temperature ranges</span></a> | <a class="reference internal" href="lesson5_8_1.html#lesson5-8-1"><span class="std std-ref">Executing and examining the Code</span></a>  &gt;&gt;</p>
 </div>
 
 
@@ -189,40 +125,42 @@
           <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2.html">Lesson 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_2.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_3.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_4.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_5.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_6.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_7.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_8.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_9.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_10.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_11.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_12.html">Install…</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_13.html">Run X2GO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_14.html">Run X2GO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_15.html">Run X2GO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson2_16.html">Run X2GO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Day 3 (2): Simple word count</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Day 3 (3): Map/Reduce Word Count</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson3_4.html">Day 3 (4): Code and Bash Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson3_5.html">Day 3 (5): Simple word count with Hadoop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson4.html">Lesson 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson4_2.html">Lesson 4 (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2.html">Lesson 2: Setting Up Your Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_2.html">Downloading X2GO Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_3.html">Install: Choosing Languange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_4.html">Install: Accpeting License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_5.html">Install: Choosing Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_6.html">Install: Choosing Location</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_7.html">Install: Clicking Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_8.html">Install: Showing Progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_9.html">Install: Finishing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_10.html">Install: Allowing SSH Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_11.html">Install: Accepting SSH Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_12.html">Install: Allowing Acess (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_13.html">Run X2GO: Claiming Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_14.html">Run X2GO: Choosing XFCE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_15.html">Run X2GO: Clicking Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_16.html">Run X2GO: Putting in Password</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson2_17.html">Configure Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3: Map/Reduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Simple word Count Non Big Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Map/Reduce Word Count Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_4.html">Executing Example with Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_5.html">Simple word count with Hadoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4.html">Introduction to NOAA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4_2.html">NOAA Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_3.html">Using Map Reduce to find the average tempeartures for each state</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson4_4.html">Lesson 4 (4)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson4_5.html">Lesson 4 (5)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5.html">Lesson 5 Map Reduce with Multiple Steps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5_2.html">Illustration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5_3.html">Illustration (2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson5_4.html">Illustration (3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4_4.html">Using Map Reduce to find the average tempeartures for each state (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4_5.html">Creating a Geographical Map from our Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5.html">Lesson 5: Map Reduce with Multiple Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_2.html">Illustrating the Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_3.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_4.html">Architecture of Nodes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_5.html">Mapper For stations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_6.html">Reducer For stations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_7.html">Mapper for temperature ranges</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reducer for temperature ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_8_1.html">Executing and examining the Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_9.html">Summary Map Reduce</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
@@ -249,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson7_5.html">Outputing Contents of an RDD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_6.html">Getting the Average Temperature Per State with RDD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_7.html">Getting the Average Temperature Per Country with RDD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson7_8.html">Spark RDD in detail</a></li>
 </ul>
 
           <div role="search">
@@ -271,7 +210,7 @@
           <div role="navigation" aria-label="related navigaton">
             <a href="lesson5_7.html" title="Mapper for temperature ranges"
               >previous</a> |
-            <a href="lesson5_9.html" title="Summary Map Reduce"
+            <a href="lesson5_8_1.html" title="Executing and examining the Code"
               >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
