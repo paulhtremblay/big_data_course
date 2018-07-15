@@ -18,3 +18,8 @@ You will have to recreate the build docs:
 5. git checkout gh-pages
 
 tar --exclude=python_code/temp_data  -cvzf  python_code.tar.gz python_code/
+
+Install for spark-submit
+pip install -t dependencies -r requirements.txt
+cd dependencies
+zip -r ../dependencies.zip .

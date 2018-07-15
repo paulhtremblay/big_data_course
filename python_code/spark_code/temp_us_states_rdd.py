@@ -1,3 +1,4 @@
+import os
 from pyspark import SparkContext, SparkConf
 conf = SparkConf().setAppName('Summer_Course').setMaster('local')
 sc = SparkContext(conf=conf)
@@ -14,7 +15,8 @@ def add_state(the_dict):
 def get_avg(a, b):
     return (a[0] + b[0], a[1] + b[1])
 
-rdd = sc.textFile('us_stations_90_sample_small.txt')\
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'us_stations_90_sample_small.txt')
+rdd = sc.textFile('file://{path}'.format(path = path))\
     .map(parse_line)\
        .map(add_state)\
        .filter(lambda x: x.get('us_state') != None)\
