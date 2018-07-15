@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>File Types &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
+    <title>Spark RDD in detail &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,18 +15,15 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reading in multiple files" href="lesson7_3.html" />
-    <link rel="prev" title="Input into Spark" href="lesson7.html" /> 
+    <link rel="prev" title="Getting the Average Temperature Per Country with RDD" href="lesson7_7.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="lesson7.html" title="Input into Spark"
+          <a href="lesson7_7.html" title="Getting the Average Temperature Per Country with RDD"
              accesskey="P">previous</a> |
-          <a href="lesson7_3.html" title="Reading in multiple files"
-             accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -41,26 +38,41 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="file-types">
-<span id="lesson7-2"></span><h1>File Types<a class="headerlink" href="#file-types" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="spark-rdd-in-detail">
+<span id="lesson7-8"></span><h1>Spark RDD in detail<a class="headerlink" href="#spark-rdd-in-detail" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Launch the following job:</li>
+</ol>
+<p><cite>spark-submit –conf spark.ui.showConsoleProgress=true –py-files dependencies.zip temp_us_counties.py</cite></p>
+<ol class="arabic simple" start="2">
+<li>Go to: <a class="reference external" href="http://localhost:4040/jobs/">http://localhost:4040/jobs/</a></li>
+<li>Click on ‘stages’ and then click on the first active stage</li>
+</ol>
+<img alt="_images/spark_dag_us_counties.png" src="_images/spark_dag_us_counties.png" />
 <ul class="simple">
-<li>The prefix before a path name shows the file type</li>
+<li>RDD stands for Resilient Distributed Datasets</li>
+<li>An RDD is immutable</li>
+<li>It is divided into tasks and distributed across partitions</li>
+<li>Our job had 3 partitions</li>
+<li>Our job had many task</li>
+<li>We can think of each job as a Directed Acrylic Graph, or DAG</li>
 </ul>
-<p><cite>sc.readTextFile(‘hdfs:///data/henry/noaa_samples/us_stations_90_sample_small.txt’)</cite></p>
-<p>The <cite>hdfs</cite> indicates that the file is part of the Hadoop file system</p>
-<p><cite>sc.readTextFile(‘s3a:///data/henry/noaa_samples/us_stations_90_sample_small.txt’)</cite></p>
-<p>The <cite>s3a</cite> indicates an Amazon S3 system</p>
-<p><cite>sc.readTextFile(‘gs:///data/henry/noaa_samples/us_stations_90_sample_small.txt’)</cite></p>
-<p>The <cite>gs</cite> indicates a Google Cloud Platform (GCP) system</p>
-<p><cite>sc.readTextFile(‘file:///data/henry/noaa_samples/us_stations_90_sample_small.txt’)</cite></p>
-<p>the <cite>file</cite> indicates that the file is local, on your hardrive</p>
+<p>Look at <a class="reference internal" href="lesson6_7.html#lesson6-7"><span class="std std-ref">Class Exercises (1)</span></a>. The DAG for that job would look like this:</p>
+<img alt="_images/spark_union_dag.png" src="_images/spark_union_dag.png" />
+<p>You can also see the DAG in the console:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Stage</span> <span class="mi">2</span><span class="p">:</span><span class="o">===================&gt;</span>                                       <span class="p">(</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This means we are in stage 2. We have run 10 tasks. There are a total 20 tasks. 2
+tasks are active.</p>
 <div class="section" id="questions">
 <h2>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Why do you think that you <em>won’t</em> use <cite>file:///</cite> when reading lots of data?</li>
-<li>What is the slowest part of any data pipeline (transforming data)?</li>
+<li>Why is only one active task running in our jobs?</li>
+<li>How can we increase the number of active tasks?</li>
+<li>What happens to our execution time as we increase the number of active tasks?</li>
 </ol>
-<p>&lt;&lt; <a class="reference internal" href="lesson7.html#lesson7"><span class="std std-ref">Input into Spark</span></a> | <a class="reference internal" href="lesson7_3.html#lesson7-3"><span class="std std-ref">Reading in multiple files</span></a>  &gt;&gt;</p>
+<p>&lt;&lt; <a class="reference internal" href="lesson7_7.html#lesson7-7"><span class="std std-ref">Getting the Average Temperature Per Country with RDD</span></a> | <span class="xref std std-ref">lesson7_9</span>  &gt;&gt;</p>
 </div>
 </div>
 
@@ -128,15 +140,16 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson6_13.html">Class Exercises (7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6_14.html">Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7.html">Input into Spark</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">File Types</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#questions">Questions</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="lesson7_2.html">File Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_3.html">Reading in multiple files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_4.html">Reading in CSV files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_5.html">Outputing Contents of an RDD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_6.html">Getting the Average Temperature Per State with RDD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson7_7.html">Getting the Average Temperature Per Country with RDD</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spark RDD in detail</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#questions">Questions</a></li>
+</ul>
+</li>
 </ul>
 
           <div role="search">
@@ -157,16 +170,14 @@
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
-            <a href="lesson7.html" title="Input into Spark"
+            <a href="lesson7_7.html" title="Getting the Average Temperature Per Country with RDD"
               >previous</a> |
-            <a href="lesson7_3.html" title="Reading in multiple files"
-              >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
           <div role="note" aria-label="source link">
               <br/>
-              <a href="_sources/lesson7_2.rst.txt"
+              <a href="_sources/lesson7_8.rst.txt"
                 rel="nofollow">Show Source</a>
           </div>
         </div>
