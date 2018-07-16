@@ -4,11 +4,11 @@
 Reducer for temperature ranges
 ================================
 
-.. literalinclude:: ../python_code/map_reduce/map_by_temp_range.py
+.. literalinclude:: ../python_code/map_reduce/reduce_stations_moisture.py
    :language: python
    :linenos:
 
 
-<< :ref:`lesson5_7` | :ref:`lesson5_9`  >>
+<< :ref:`lesson5_7` | :ref:`lesson5_8_1`  >>
 
 

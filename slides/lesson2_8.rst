@@ -1,9 +1,9 @@
 ..  _lesson2_8:
 
 
-===========
-Install...
-===========
+===============================
+Install: Showing Progress   
+===============================
 
 
 .. image:: img/install_x2go/install6.png

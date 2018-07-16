@@ -1,9 +1,9 @@
 ..  _lesson2_7:
 
 
-===========
-Install...
-===========
+===============================
+Install: Clicking Install   
+===============================
 
 
 .. image:: img/install_x2go/install5.png

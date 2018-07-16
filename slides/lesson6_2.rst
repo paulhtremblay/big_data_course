@@ -1,8 +1,8 @@
 ..  _lesson6_2:
 
-==================
-Architecture
-==================
+=======================
+Architecture of Spark
+=======================
 
 .. image:: img/spark_cluster_architecture1.png
 

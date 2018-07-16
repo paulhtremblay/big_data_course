@@ -1,9 +1,9 @@
 ..  _lesson2_11:
 
 
-===========
-Install...
-===========
+===============================
+Install: Accepting SSH Key   
+===============================
 
 
 .. image:: img/install_x2go/install9.png

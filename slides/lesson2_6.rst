@@ -1,9 +1,9 @@
 ..  _lesson2_6:
 
 
-===========
-Install...
-===========
+===============================
+Install: Choosing Location   
+===============================
 
 
 .. image:: img/install_x2go/install4.png

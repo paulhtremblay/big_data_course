@@ -1,7 +1,7 @@
 ..  _lesson4_2:
 
 =============
-Lesson 4 (2)
+NOAA Format
 =============
 
 Introduction to the NOAA fixed character format
@@ -9,11 +9,13 @@ Introduction to the NOAA fixed character format
 
 .. image:: img/isd_example.png
 
-- The records always occurr in the same position. Or example, the temperatuer occurs from character 88 to character 92
+- Most of the records always occurr in the same position. Or example, the temperatuer occurs from character 88 to character 92
 - Some of the records have to divided. For example, the temperature is in Celcius, multiplied by 10. The real values is
   242/10 = 24.2 C
+
 - Missing data is represented by special numbers. For example, "9999" means there is no data. We have to ignore
   these records
+
 - The full set is here: https://s3.console.aws.amazon.com/s3/buckets/paulhtremblay/noaa/data/?region=us-east-1&tab=overview
 - Samples are here: https://s3.console.aws.amazon.com/s3/buckets/paulhtremblaypublic/noaa_data/?region=us-east-1&tab=overview
 

@@ -1,9 +1,9 @@
 ..  _lesson2_9:
 
 
-===========
-Install...
-===========
+===============================
+Install: Finishing   
+===============================
 
 
 .. image:: img/install_x2go/install7.png

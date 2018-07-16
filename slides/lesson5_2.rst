@@ -1,7 +1,7 @@
 ..  _lesson5_2:
 
 =========================================
-Illustration
+Illustrating the Problem
 =========================================
 (Of course, there will be many more stations and more groups in the real example!)
 

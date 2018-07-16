@@ -1,8 +1,8 @@
 ..  _lesson6_3:
 
-==================
-simple word count
-==================
+===========================
+Simple Word Count in Spark
+===========================
 
 .. literalinclude:: ../python_code/spark_code/word_count.py
    :language: python

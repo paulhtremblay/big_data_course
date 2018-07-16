@@ -13,7 +13,7 @@ def get_us_state(x):
         return False
     return True
 
-def consecutive_(x):
+def find_consecutive_temps(x):
     l = sorted(x[1], key = lambda x: x[1])
     current = None
     counter = 0
@@ -30,25 +30,21 @@ def consecutive_(x):
     return (x[0], the_max)
 
 
-def consecutive(path):
-    sc = SparkContext('local')
-    sc.setLogLevel("WARN")
-    sqlContext = SQLContext(sc)
-    rdd = sc.textFile('file://{path}'.format(path = path))\
-       .map(lambda x: parse_line(x))\
-       .filter(get_us_state)\
-       .filter(lambda x: x.get('point_observation_date_time') > datetime.datetime(1990, 1, 1))\
-       .filter(lambda x: x.get('point_observation_date_time') < datetime.datetime(1990, 2, 1))\
-       .map(lambda x: ( stations_us_dict.d.get(x.get('fixed_weather_station_usaf_master_station_catalog_identifier')).get('st'),
-            (x.get('air_temperature_observation_air_temperature'),
-            x.get('point_observation_date_time')
-                )))\
-       .groupByKey()\
-       .map(consecutive_)
-
-    return rdd
+conf = SparkConf().setAppName('Summer_Course').setMaster('local')
+path = '/home/paul/Documents/projects/big_data_course/workspace/us_stations_90_sample_small.txt'
+sc = SparkContext(conf=conf)
+rdd = sc.textFile('file://{path}'.format(path = path))\
+   .map(lambda x: parse_line(x))\
+   .filter(get_us_state)\
+   .filter(lambda x: x.get('point_observation_date_time') > datetime.datetime(1990, 1, 1))\
+   .filter(lambda x: x.get('point_observation_date_time') < datetime.datetime(1990, 2, 1))\
+   .map(lambda x: ( stations_us_dict.d.get(x.get('fixed_weather_station_usaf_master_station_catalog_identifier')).get('st'),
+        (x.get('air_temperature_observation_air_temperature'),
+        x.get('point_observation_date_time')
+            )))\
+   .groupByKey()\
+   .map(find_consecutive_temps)\
+   .saveAsTextFile('file:////home/paul/Documents/projects/big_data_course/workspace/consecutive_temps_out')
 
 
-if __name__ == '__main__':
-    rdd  = consecutive('/home/paul/Documents/projects/big_data_course/workspace/us_stations_90_sample_small.txt')
-    pp.pprint(rdd.take(10))
+

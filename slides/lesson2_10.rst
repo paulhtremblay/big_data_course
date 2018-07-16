@@ -1,9 +1,9 @@
 ..  _lesson2_10:
 
 
-===========
-Install...
-===========
+===============================
+Install: Allowing SSH Access   
+===============================
 
 
 .. image:: img/install_x2go/install8.png

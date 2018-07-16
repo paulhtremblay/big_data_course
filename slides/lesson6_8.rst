@@ -1,7 +1,7 @@
 ..  _lesson6_8:
 
 =======================================
-Class Exercises (2)
+Class Exercises: filter
 =======================================
 
 Filter

@@ -1,9 +1,9 @@
 ..  _lesson2_4:
 
 
-===========
-Install...
-===========
+=============================
+Install: Accpeting License
+=============================
 
 
 .. image:: img/install_x2go/install2.png

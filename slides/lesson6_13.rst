@@ -1,13 +1,9 @@
 ..  _lesson6_13:
 
 =======================================
-Class Exercises (7)
+Class Exercises: distinct
 =======================================
 
-Distinct
-============
-
-Count the unique to *both* David Copperfied by using `distinct`. 
-
+Count the unique to David Copperfied by using `distinct`. 
 
 << :ref:`lesson6_12` | :ref:`lesson6_14`  >>

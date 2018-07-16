@@ -1,7 +1,7 @@
 ..  _lesson3_5:
 
 ========================================
-Day 3 (5): Simple word count with Hadoop
+Simple word count with Hadoop
 ========================================
 
 

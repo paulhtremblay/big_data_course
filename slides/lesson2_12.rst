@@ -1,9 +1,9 @@
 ..  _lesson2_12:
 
 
-===========
-Install...
-===========
+===============================
+Install: Allowing Acess (2)   
+===============================
 
 
 .. image:: img/install_x2go/install10.png

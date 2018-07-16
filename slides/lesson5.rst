@@ -1,7 +1,7 @@
-..  _lesson5_intro:
+..  _lesson5:
 
 =========================================
-Lesson 5 Map Reduce with Multiple Steps
+Lesson 5: Map Reduce with Multiple Steps
 =========================================
 
 Do Hotter Climates have more or less rainfall?

@@ -1,9 +1,9 @@
 ..  _lesson2_15:
 
 
-===========
-Run X2GO
-===========
+===========================
+Run X2GO: Clicking Start
+===========================
 
 4. Click here to start a session
 

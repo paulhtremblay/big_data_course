@@ -1,7 +1,7 @@
 ..  _lesson3_4:
 
 =================================
-Day 3 (4): Code and Bash Example
+Executing Example with Bash
 =================================
 
 Mapper

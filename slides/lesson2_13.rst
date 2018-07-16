@@ -1,9 +1,9 @@
 ..  _lesson2_13:
 
 
-===========
-Run X2GO
-===========
+===========================
+Run X2GO: Claiming Image
+===========================
 
 1. Go to: https://portal.azure.com/#blade/HubsExtension/Resources/resourceType/Microsoft.Resources%2Fresources
    Claim an image

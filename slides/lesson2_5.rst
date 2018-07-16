@@ -1,10 +1,9 @@
 ..  _lesson2_5:
 
 
-===========
-Install...
-===========
-
+===============================
+Install: Choosing Components   
+===============================
 
 .. image:: img/install_x2go/install3.png
 

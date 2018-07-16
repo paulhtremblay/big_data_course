@@ -1,7 +1,7 @@
 ..  _lesson6_9:
 
 =======================================
-Class Exercises (3)
+Class Exercises: sample
 =======================================
 
 Sample

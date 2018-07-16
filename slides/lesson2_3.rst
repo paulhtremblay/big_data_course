@@ -1,9 +1,9 @@
 ..  _lesson2_3:
 
 
-===========
-Install...
-===========
+=============================
+Install: Choosing Languange
+=============================
 
 Open up the executable file and execute it.
 

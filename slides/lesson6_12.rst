@@ -1,7 +1,7 @@
 ..  _lesson6_12:
 
 =======================================
-Class Exercises (6)
+Class Exercises: intersection
 =======================================
 
 Intersection
