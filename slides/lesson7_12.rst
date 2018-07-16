@@ -8,5 +8,5 @@ groupByKey: Spark code
    :language: python
    :linenos:
 
-<< :ref:`lesson7_11` | :ref:`lesson_8`  >>
+<< :ref:`lesson7_11` | :ref:`lesson8`  >>
 
