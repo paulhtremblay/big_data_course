@@ -12,6 +12,8 @@ Big Data, Xiangfei Education Group UW Summer 2018
    :caption: Contents:
 
    introduction
+   super_hero
+   lesson1_2
    lesson2
    lesson2_2
    lesson2_3
