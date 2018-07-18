@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Creating DataFrames: From RDD &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
+    <title>Average Temperature for each State with a Dataframe using SQL &#8212; Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,18 +15,15 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Cleaning up a Dataframe" href="lesson8_5.html" />
-    <link rel="prev" title="Creating DataFrames: CSV" href="lesson8_3.html" /> 
+    <link rel="prev" title="Executing SQL on a Dataframe" href="lesson8_6.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="lesson8_3.html" title="Creating DataFrames: CSV"
+          <a href="lesson8_6.html" title="Executing SQL on a Dataframe"
              accesskey="P">previous</a> |
-          <a href="lesson8_5.html" title="Cleaning up a Dataframe"
-             accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -41,12 +38,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="creating-dataframes-from-rdd">
-<span id="lesson8-4"></span><h1>Creating DataFrames: From RDD<a class="headerlink" href="#creating-dataframes-from-rdd" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>Often, it is useful to read unstructured data in as an RDD, and then convert it
-to a dataframe</li>
-</ul>
+  <div class="section" id="average-temperature-for-each-state-with-a-dataframe-using-sql">
+<span id="lesson8-7"></span><h1>Average Temperature for each State with a Dataframe using SQL<a class="headerlink" href="#average-temperature-for-each-state-with-a-dataframe-using-sql" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -63,34 +56,150 @@ to a dataframe</li>
 14
 15
 16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
-<span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
 <span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
 <span class="kn">from</span> <span class="nn">parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
-<span class="kn">from</span> <span class="nn">parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
+
+<span class="kn">from</span>  <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SQLContext</span>
 
 <span class="n">conf</span> <span class="o">=</span> <span class="n">SparkConf</span><span class="p">()</span><span class="o">.</span><span class="n">setAppName</span><span class="p">(</span><span class="s1">&#39;Summer_Course&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setMaster</span><span class="p">(</span><span class="s1">&#39;local&#39;</span><span class="p">)</span>
 <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="n">conf</span><span class="o">=</span><span class="n">conf</span><span class="p">)</span>
+<span class="n">sqlContext</span> <span class="o">=</span> <span class="n">SQLContext</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
 <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
  <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span> \
  <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Summer_Course&quot;</span><span class="p">)</span> \
  <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
-<span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s1">&#39;us_stations_90_sample_small.txt&#39;</span><span class="p">)</span>\
+<span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s1">&#39;us_stations_90s_sample_big.txt&#39;</span><span class="p">)</span>\
     <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parse_line</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">rdd</span><span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">noaa_df</span> <span class="o">=</span> <span class="n">rdd</span><span class="o">.</span><span class="n">toDF</span><span class="p">()</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;air_temperature_observation_air_temperature_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;air_temperature_observation_dew_point_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;air_temperature_observation_dew_point_temperature&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;atmospheric_pressure_observation_sea_level_pressure&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;atmospheric_pressure_observation_sea_level_pressure_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;fixed_weather_station_call_letter_identifier&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;fixed_weather_station_ncei_wban_identifier&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;fixed_weather_station_ncei_wban_identifier&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geophysical_point_observation_additional_data_identifier&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geophysical_point_observation_data_source_flag&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geophysical_point_observation_elevation_dimension&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geophysical_point_observation_latitude_coordinate&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geophysical_point_observation_longitude_coordinate&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geophysical_report_type_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;liquid_precipitation_depth_dimension&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;liquid_precipitation_occurrence_identifier&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;liquid_precipitation_period_quantity_in_hours&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;meteorological_point_observation_quality_control_process_name&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;sky_condition_observation_cavok_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;sky_condition_observation_ceiling_determination_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;sky_condition_observation_ceiling_height_dimension&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;sky_condtion_observation_ceiling_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;total_variable_characters&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;visibility_observation_distance_dimension&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;visibility_observation_distance_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;visibility_observation_quality_variability_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;visibility_observation_variability_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;wind_observation_direction_angle&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;wind_observation_direction_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;wind_observation_speed_quality_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;wind_observation_speed_rate&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;wind_observation_type_code&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;fixed_weather_station_usaf_master_station_catalog_identifier&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;point_observation_date_time&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;air_temperature_observation_air_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">)</span>
+<span class="n">noaa_df</span><span class="o">.</span><span class="n">registerTempTable</span><span class="p">(</span><span class="s1">&#39;noaa&#39;</span><span class="p">)</span>
+
+<span class="n">states_df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;us_stations_states.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">states_df</span><span class="o">.</span><span class="n">registerTempTable</span><span class="p">(</span><span class="s2">&quot;states&quot;</span><span class="p">)</span>
+
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">sqlContext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;select *</span>
+<span class="s2">    from noaa</span>
+<span class="s2">    inner join states</span>
+<span class="s2">    on states.id = noaa.id</span>
+<span class="s2">    limit 10</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">results_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">avg_df</span> <span class="o">=</span> <span class="n">sqlContext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;select state,</span>
+<span class="s2">        avg(temperature) as avg_temp</span>
+<span class="s2">    from noaa</span>
+<span class="s2">    inner join states</span>
+<span class="s2">    on states.id = noaa.id</span>
+<span class="s2">    group by state</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">avg_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
 
 </pre></div>
 </td></tr></table></div>
-<p><cite>df.columns</cite>
-<cite>df.drop(‘total_variable_characters’)</cite>
-<cite>df = df.withColumnRenamed(‘air_temperature_observation_air_temperature’, ‘temperature’)</cite></p>
-<ul class="simple">
-<li>There are many more methods for a dataframe, including groupByKey, withColumn (to add or modify a column),
-join, union, etc.</li>
-<li>We will not cover these methods. Instead, we will convert the dataframe to SQL, and make our transformations there</li>
-</ul>
-<p>&lt;&lt; <a class="reference internal" href="lesson8_3.html#lesson8-3"><span class="std std-ref">Creating DataFrames: CSV</span></a> | <a class="reference internal" href="lesson8_5.html#lesson8-5"><span class="std std-ref">Cleaning up a Dataframe</span></a>  &gt;&gt;</p>
+<div class="section" id="class-exercise">
+<h2>Class Exercise<a class="headerlink" href="#class-exercise" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Get the maximum temperature for each state</li>
+<li>Get the minimum temperature for each state</li>
+<li>Get the maximum and minimum temperature for each state, for each month</li>
+</ol>
+<p>&lt;&lt; <a class="reference internal" href="lesson8_6.html#lesson8-6"><span class="std std-ref">Executing SQL on a Dataframe</span></a> | <span class="xref std std-ref">lesson8_8</span>  &gt;&gt;</p>
+</div>
 </div>
 
 
@@ -176,10 +285,13 @@ join, union, etc.</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8.html">Spark DataFrames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_2.html">Overview DataFrames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_3.html">Creating DataFrames: CSV</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating DataFrames: From RDD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson8_4.html">Creating DataFrames: From RDD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_5.html">Cleaning up a Dataframe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_6.html">Executing SQL on a Dataframe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson8_7.html">Average Temperature for each State with a Dataframe using SQL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Average Temperature for each State with a Dataframe using SQL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-exercise">Class Exercise</a></li>
+</ul>
+</li>
 </ul>
 
           <div role="search">
@@ -200,16 +312,14 @@ join, union, etc.</li>
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
-            <a href="lesson8_3.html" title="Creating DataFrames: CSV"
+            <a href="lesson8_6.html" title="Executing SQL on a Dataframe"
               >previous</a> |
-            <a href="lesson8_5.html" title="Cleaning up a Dataframe"
-              >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>
           <div role="note" aria-label="source link">
               <br/>
-              <a href="_sources/lesson8_4.rst.txt"
+              <a href="_sources/lesson8_7.rst.txt"
                 rel="nofollow">Show Source</a>
           </div>
         </div>
