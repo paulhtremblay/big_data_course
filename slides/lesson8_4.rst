@@ -11,5 +11,13 @@ Creating DataFrames: From RDD
    :language: python
    :linenos:
 
-<< :ref:`lesson8_3` | :ref:`lesson8_4`  >>
+`df.columns`
+`df.drop('total_variable_characters')`
+`df = df.withColumnRenamed('air_temperature_observation_air_temperature', 'temperature')`
+
+- There are many more methods for a dataframe, including groupByKey, withColumn (to add or modify a column),
+  join, union, etc.
+- We will not cover these methods. Instead, we will convert the dataframe to SQL, and make our transformations there
+
+<< :ref:`lesson8_3` | :ref:`lesson8_5`  >>
 
