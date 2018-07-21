@@ -162,3 +162,4 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 #html_style = 'my_theme.css'
+latex_toplevel_sectioning = 'section'

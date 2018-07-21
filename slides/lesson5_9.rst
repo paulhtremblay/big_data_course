@@ -18,9 +18,9 @@ History
 
 The three main problems solved were:
 
-1. Parallelization — how to parallelize the computation
-2. Distribution — how to distribute the data
-3. Fault-tolerance — how to handle component failure
+1. Parallelization: how to parallelize the computation
+2. Distribution: how to distribute the data
+3. Fault-tolerance: how to handle component failure
 
 - 2006, Hadoop makes map/reduce widely available. 
 - Facebook and others begin using it
