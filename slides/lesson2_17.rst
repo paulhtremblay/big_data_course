@@ -24,9 +24,9 @@ Install basic libraries::
 
 Install my graphing library. Instead of 'x', use the latest version::
 
- wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/python_big_data_tools-.2x.tar.gz
+ wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/python_big_data_tools-.23.tar.gz
  tar -xvzf python_big_data_tools-.2.tar.gz
- cd python_big_data_tools-.2x/
+ cd python_big_data_tools-.23/
  python setup.py install
 
 Setup the environmental variables
@@ -44,7 +44,7 @@ Open up .bashrc, and put the following::
 Get the python code for this course::
 
  cd ~/
- wget://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/python_code.tar.gz 
+ wget: https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/python_code.tar.gz 
 
 
 Make a workspace directory::
