@@ -5,8 +5,8 @@ import sys
 import pprint
 pp = pprint.PrettyPrinter(indent = 4)
 
-from parsers.parse_noaa import parse_line
-from parsers.stations_us_dict import d as us_stations_dict
+from parse_noaa import parse_line
+from stations_us_dict import d as us_stations_dict
 
 for line in sys.stdin:
     line = line.strip()

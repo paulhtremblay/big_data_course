@@ -13,6 +13,7 @@ Big Data, Xiangfei Education Group UW Summer 2018
 
    introduction
    super_hero
+   places_to_visit
    lesson1_2
    lesson2
    lesson2_2
@@ -32,6 +33,7 @@ Big Data, Xiangfei Education Group UW Summer 2018
    lesson2_16
    lesson2_17
    lesson3
+   lesson3_1_5.rst
    lesson3_2
    lesson3_3
    lesson3_4

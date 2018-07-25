@@ -19,6 +19,14 @@ Introduction to the NOAA fixed character format
 - The full set is here: https://s3.console.aws.amazon.com/s3/buckets/paulhtremblay/noaa/data/?region=us-east-1&tab=overview
 - Samples are here: https://s3.console.aws.amazon.com/s3/buckets/paulhtremblaypublic/noaa_data/?region=us-east-1&tab=overview
 
+- https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/noaa_data/us_stations_90_sample_small.csv
+- https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/noaa_data/us_stations_90_sample_small.txt
+- https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/noaa_data/us_stations_90s_sample_big.csv
+- https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/noaa_data/us_stations_90s_sample_big.txt
+
+
+cat ../data/simple_work_count_words.txt | ./mapper.py | sort | ./reducer.py
+
 Using Parsers
 =============
 

@@ -63,5 +63,10 @@ Big Data Concepts
 - states are difficult if not impossible with parallel processing (very important)
 - the slowest part of any job is reading and writing to disk (very important)
 
+Places to Vist
+================
+
+:ref:`places_to_visit`
+
 
 :ref:`lesson1_2`  >>
