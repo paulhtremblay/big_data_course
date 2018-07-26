@@ -1,0 +1,51 @@
+ cd /dsvm/tools/spark/spark-2.2.0/bin/
+ sudo nano load-spark-env.sh
+ #password is: DSVMAdm1n123
+ # put the following line at the *bottom* of the file
+ export SPARK_LOCAL_IP='127.0.0.1'
+
+ cd ~/
+ nano .bashrc
+ #put the following at the bottom of your file
+ export PYTHONPATH=/dsvm/tools/spark/spark-2.2.0/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+
+ cd ~/
+ wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/class_2018_07_26.txt
+ wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/python_big_data_tools-.23.tar.gz
+ tar -xvzf python_big_data_tools-.23.tar.gz
+ cd python_big_data_tools-.23/
+ python setup.py install --user
+
+ source activate class
+ cd ~
+ rm -Rf python_code
+ wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/python_code/python_code.tar.gz
+ tar -xvzf python_code.tar.gz
+ rm -Rf workspace
+ mkdir workspace
+ cd workspace
+ wget http://www.gutenberg.org/files/766/766-0.txt
+ mv 766-0.txt copperfiled.txt
+ wget http://www.gutenberg.org/cache/epub/730/pg730.txt
+ mv pg730.txt twist.txt
+ cp ../python_code/map_reduce/map_noaa_temp_by_state.py .
+ cp ../python_code/map_reduce/reduce_state_temps.py .
+ wget https://s3-us-west-2.amazonaws.com/paulhtremblaypublic/noaa_data/us_stations_90_sample_small.txt
+ cp ../python_code/parsers/parse_noaa.py .
+ cp ../python_code/parsers/stations_us_dict.py .
+ cat us_stations_90_sample_small.txt | ./map_noaa_temp_by_state.py |sort | ./reduce_state_temps.py > avg_state_temps.csv
+
+
+
+
+
+from big_data_tools.bokeh_tools.all_p import *
+import csv
+
+state_dict = {}
+with open("avg_state_temps.csv", 'r') as read_obj:
+   csv_reader = csv.reader(read_obj)
+   for line in csv_reader:
+       state_dict[line[0]] = float(line[1])
+from bokeh.palettes import *
+make_us_map(the_type = 'state', default_color="blue", data = state_dict,  palette=Oranges[9])
