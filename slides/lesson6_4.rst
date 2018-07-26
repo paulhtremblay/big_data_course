@@ -16,7 +16,7 @@ Questions:
 Class Exercise
 ===============
 
-Write a spark job to count the number of words in David Copperfied (found here: http://www.gutenberg.org/files/43111/)
+Fix the last job so it does not include punctuation. 
 
 << :ref:`lesson6_3` | :ref:`lesson6_5`  >>
 
