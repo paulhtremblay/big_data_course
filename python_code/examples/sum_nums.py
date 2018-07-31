@@ -1,4 +1,4 @@
-def firstn(n):
+def first_n_as_list(n):
     num = 0
     nums =  []
     while num < n:
@@ -6,5 +6,6 @@ def firstn(n):
         num += 1
     return nums
 
-sum_of_first_n = sum(firstn(1000000))
+s = sum(first_n_as_list(1000000))
+print(s)
 
