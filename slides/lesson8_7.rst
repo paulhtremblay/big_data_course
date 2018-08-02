@@ -15,6 +15,5 @@ Class Exercise
 2. Get the minimum temperature for each state
 3. Get the maximum and minimum temperature for each state, for each month
 
-
 << :ref:`lesson8_6` | :ref:`lesson8_8`  >>
 
