@@ -1,20 +1,13 @@
-import sys
-import os
-print(os.path.dirname(os.path.abspath(__file__)))
-path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'copperfield.txt')
+import datetime
 from pyspark import SparkContext, SparkConf
+
 conf = SparkConf().setAppName('Summer_Course').setMaster('local')
 sc = SparkContext(conf=conf)
-rdd1 = sc.textFile('file:///{path}'.format(path = path))
-rdd2 = rdd1.flatMap(lambda x: x.split(' '))
-rdd3 = rdd2.map(lambda x: (x, 1))
-rdd4 =  rdd3.reduceByKey(lambda a, b: a + b)
-
-
-the_list = rdd4.collect()
-
-for i in the_list:
-    print(i)
+sc.textFile('s3a://paulhtremblay/copperfield.txt')\
+    .flatMap(lambda x: x.split(' '))\
+    .map(lambda x: (x, 1))\
+    .reduceByKey(lambda a, b: a + b)\
+    .saveAsTextFile('s3a://paulhtremblay/word_count_output_{date}'.format(date = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")))
 
 
 
