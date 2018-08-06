@@ -1,11 +1,10 @@
-import sys
-sys.path.append('/home/paul/Documents/projects/big_data_course/workspace/')
-
 import datetime
+import sys
+print(sys.path)
 from pyspark.sql import SparkSession
 from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import *
-from parse_noaa2 import parse_line
+from course_tools.parsers.parse_noaa2 import parse_line
 import pprint
 pp = pprint.PrettyPrinter(indent = 4)
 

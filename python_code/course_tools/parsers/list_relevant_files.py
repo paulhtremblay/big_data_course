@@ -4,7 +4,6 @@ bucket = 'paulhtremblay'
 my_bucket = s3.Bucket(bucket)
 from io import BytesIO
 from gzip import GzipFile
-<<<<<<< HEAD
 from parsers.parse_noaa import parse_line
 from parsers.stations_us_dict import d as us_stations_dict
 import pprint
