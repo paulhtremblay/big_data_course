@@ -1,4 +1,7 @@
 .ipynb_checkpoints/*
+dist/*
+build/*
+course_tools.egg-info/*
 *.ipynb
 map_reduce/temp_data/*
 temp_data/*
