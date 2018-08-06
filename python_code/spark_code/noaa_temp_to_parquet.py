@@ -1,8 +1,10 @@
+import sys
+sys.path.append('/home/paul/Documents/projects/big_data_course/workspace/')
+
 import datetime
 from pyspark.sql import SparkSession
 from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import *
-from pyspark.sql import Row
 from parse_noaa2 import parse_line
 import pprint
 pp = pprint.PrettyPrinter(indent = 4)
@@ -15,6 +17,7 @@ spark = SparkSession.builder \
  .getOrCreate()
 
 rdd = sc.textFile('s3a://paulhtremblay/noaa/data/1990/010010-99999-1990.gz')\
+        .union(sc.textFile('s3a://paulhtremblay/noaa/data/1990/010014-99999-1990.gz'))\
     .map(parse_line)
 schema = StructType([StructField("air_temperature_observation_air_temperature", FloatType()),
                     StructField("air_temperature_observation_air_temperature_quality_code", StringType()),

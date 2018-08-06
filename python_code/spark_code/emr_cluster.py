@@ -52,7 +52,7 @@ def make_bootstrap():
             {
                 'Name': 'Wordcount bootstrap',
                 'ScriptBootstrapAction': {
-                    'Path': 's3://paulhtremblay/emr_bootstraps/emr_bootstrap_word_count.sh',
+                    'Path': 's3://paulhtremblay/emr_bootstraps/emr_bootstrap_big_data_class.sh',
                 }
             },
         ]
