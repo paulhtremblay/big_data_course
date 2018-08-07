@@ -44,50 +44,10 @@
   <div class="section" id="a-short-intro-to-lazy-programming">
 <span id="lesson5-13"></span><h1>A Short Intro to Lazy Programming<a class="headerlink" href="#a-short-intro-to-lazy-programming" title="Permalink to this headline">¶</a></h1>
 <p>The following code ads up al the numbers from 1 to n.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">first_n_as_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">nums</span> <span class="o">=</span>  <span class="p">[]</span>
-    <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="n">nums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
-        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">nums</span>
-
-<span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">first_n_as_list</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-</pre></div>
-</td></tr></table></div>
 <p>The function stores all the numbers in a list before summing them
 up. What happens if the list was really large? We would use a lot of memory
 when we don’t have to. We only want the answer, so there is no need to
 create a list.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">first_n_as_lazy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="n">num</span>
-        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">s</span>  <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">first_n_as_lazy</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
 <p>Notes:</p>
 <ul class="simple">
 <li>the generator is <em>lazy</em>. It only evaluates the numbers when it has to.</li>
@@ -215,6 +175,14 @@ create a list.</p>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_6.html">Executing SQL on a Dataframe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_7.html">Average Temperature for each State with a Dataframe using SQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_8.html">Anatomy of Dataframes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9.html">Spark Data Frames Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_2.html">Download the files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_3.html">Install the correct Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_4.html">Read in a Different File Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_5.html">Create a Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_6.html">Manipulate Columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_7.html">Using SQL in Spark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_8.html">Writing the resuls</a></li>
 </ul>
 
           <div role="search">

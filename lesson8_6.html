@@ -49,65 +49,6 @@
 or business analyst, you <em>must</em> learn SQL. There are many
 good books</li>
 </ul>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
-<span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
-<span class="kn">from</span> <span class="nn">parse_noaa</span> <span class="kn">import</span> <span class="n">parse_line</span>
-
-<span class="kn">from</span>  <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SQLContext</span>
-
-<span class="n">conf</span> <span class="o">=</span> <span class="n">SparkConf</span><span class="p">()</span><span class="o">.</span><span class="n">setAppName</span><span class="p">(</span><span class="s1">&#39;Summer_Course&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setMaster</span><span class="p">(</span><span class="s1">&#39;local&#39;</span><span class="p">)</span>
-<span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="n">conf</span><span class="o">=</span><span class="n">conf</span><span class="p">)</span>
-<span class="n">sqlContext</span> <span class="o">=</span> <span class="n">SQLContext</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
-<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
- <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span> \
- <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Summer_Course&quot;</span><span class="p">)</span> \
- <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">df = spark.read.csv(&#39;us_stations_states.csv&#39;, header=True)</span>
-<span class="sd">df.show()</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s1">&#39;us_stations_90s_sample_big.txt&#39;</span><span class="p">)</span>\
-    <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parse_line</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">rdd</span><span class="o">.</span><span class="n">toDF</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">registerTempTable</span><span class="p">(</span><span class="s1">&#39;noaa&#39;</span><span class="p">)</span>
-<span class="n">max_temp_df</span> <span class="o">=</span> <span class="n">sqlContext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;select max(air_temperature_observation_air_temperature)</span>
-<span class="s2">    from noaa</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
-<span class="n">max_temp_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
-
-</pre></div>
-</td></tr></table></div>
 <p>&lt;&lt; <a class="reference internal" href="lesson8_5.html#lesson8-5"><span class="std std-ref">Cleaning up a Dataframe</span></a> | <a class="reference internal" href="lesson8_7.html#lesson8-7"><span class="std std-ref">Average Temperature for each State with a Dataframe using SQL</span></a>  &gt;&gt;</p>
 </div>
 
@@ -122,6 +63,7 @@ good books</li>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to BIG DATA 110 A</a></li>
 <li class="toctree-l1"><a class="reference internal" href="super_hero.html">Super Hero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="places_to_visit.html">Places To Visit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson1_2.html">Slow Data = No Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2.html">Lesson 2: Setting Up Your Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_2.html">Downloading X2GO Client</a></li>
@@ -141,11 +83,13 @@ good books</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_16.html">Run X2GO: Putting in Password</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_17.html">Configure Image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3: Map/Reduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_1_5.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Simple word Count Non Big Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Map/Reduce Word Count Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_4.html">Executing Example with Bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_5.html">Simple word count with Hadoop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4.html">Introduction to NOAA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4_1_5.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_2.html">NOAA Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_3.html">Using Map Reduce to find the average tempeartures for each state</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_4.html">Using Map Reduce to find the average tempeartures for each state (2)</a></li>
@@ -163,6 +107,7 @@ good books</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_12.html">A Short Intro to Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_12_2.html">A Short Intro to Lazy Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_13.html">A Short Intro to Lazy Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6.html">Lesson 6 Introduction to Spark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6_2.html">Architecture of Spark</a></li>
@@ -198,6 +143,15 @@ good books</li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_5.html">Cleaning up a Dataframe</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Executing SQL on a Dataframe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_7.html">Average Temperature for each State with a Dataframe using SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson8_8.html">Anatomy of Dataframes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9.html">Spark Data Frames Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_2.html">Download the files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_3.html">Install the correct Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_4.html">Read in a Different File Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_5.html">Create a Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_6.html">Manipulate Columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_7.html">Using SQL in Spark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_8.html">Writing the resuls</a></li>
 </ul>
 
           <div role="search">

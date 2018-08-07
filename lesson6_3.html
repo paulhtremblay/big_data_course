@@ -43,47 +43,6 @@
             
   <div class="section" id="simple-word-count-in-spark">
 <span id="lesson6-3"></span><h1>Simple Word Count in Spark<a class="headerlink" href="#simple-word-count-in-spark" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s1">&#39;copperfield.txt&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
-<span class="n">conf</span> <span class="o">=</span> <span class="n">SparkConf</span><span class="p">()</span><span class="o">.</span><span class="n">setAppName</span><span class="p">(</span><span class="s1">&#39;Summer_Course&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setMaster</span><span class="p">(</span><span class="s1">&#39;local&#39;</span><span class="p">)</span>
-<span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="n">conf</span><span class="o">=</span><span class="n">conf</span><span class="p">)</span>
-<span class="n">rdd1</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s1">&#39;file:///{path}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">))</span>
-<span class="n">rdd2</span> <span class="o">=</span> <span class="n">rdd1</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
-<span class="n">rdd3</span> <span class="o">=</span> <span class="n">rdd2</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">rdd4</span> <span class="o">=</span>  <span class="n">rdd3</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-
-
-<span class="n">the_list</span> <span class="o">=</span> <span class="n">rdd4</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">the_list</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-
-
-
-</pre></div>
-</td></tr></table></div>
 <p>&lt;&lt; <a class="reference internal" href="lesson6_2.html#lesson6-2"><span class="std std-ref">Architecture of Spark</span></a> | <a class="reference internal" href="lesson6_4.html#lesson6-4"><span class="std std-ref">Architecture behind simple word count</span></a>  &gt;&gt;</p>
 </div>
 
@@ -124,6 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson3_4.html">Executing Example with Bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_5.html">Simple word count with Hadoop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4.html">Introduction to NOAA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4_1_5.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_2.html">NOAA Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_3.html">Using Map Reduce to find the average tempeartures for each state</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4_4.html">Using Map Reduce to find the average tempeartures for each state (2)</a></li>
@@ -141,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_12.html">A Short Intro to Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_12_2.html">A Short Intro to Lazy Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_13.html">A Short Intro to Lazy Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6.html">Lesson 6 Introduction to Spark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6_2.html">Architecture of Spark</a></li>
@@ -177,6 +138,14 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson8_6.html">Executing SQL on a Dataframe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_7.html">Average Temperature for each State with a Dataframe using SQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_8.html">Anatomy of Dataframes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9.html">Spark Data Frames Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_2.html">Download the files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_3.html">Install the correct Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_4.html">Read in a Different File Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_5.html">Create a Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_6.html">Manipulate Columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_7.html">Using SQL in Spark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_8.html">Writing the resuls</a></li>
 </ul>
 
           <div role="search">

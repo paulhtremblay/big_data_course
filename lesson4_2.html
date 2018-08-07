@@ -16,14 +16,14 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using Map Reduce to find the average tempeartures for each state" href="lesson4_3.html" />
-    <link rel="prev" title="Introduction to NOAA Dataset" href="lesson4.html" /> 
+    <link rel="prev" title="Preliminaries" href="lesson4_1_5.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="index.html">Big Data, Xiangfei Education Group, UW Summer 2018 1 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
-          <a href="lesson4.html" title="Introduction to NOAA Dataset"
+          <a href="lesson4_1_5.html" title="Preliminaries"
              accesskey="P">previous</a> |
           <a href="lesson4_3.html" title="Using Map Reduce to find the average tempeartures for each state"
              accesskey="N">next</a> |
@@ -67,19 +67,6 @@ these records</li>
 allow us to focus on the important parts. Below is the code. You don’t need to understand this code or study it.
 Just understand the parser converts the fixed-format into a Python dictionary.</p>
 <p>Example Use:</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
-<span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">parse_noaa</span>
-<span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;0147619760999991990071418004-15883+054517FM-12+001399999V0201201N00771220001CN0300001N9+02421+02231101821ADDAA106000091AG10999GA1021+007509089GF102991021081008001001001KA1120N+99999MD1999999+0081REMSYN029333   20282 58008 82825 918/8EQDQ01 +02822ATMN  &quot;</span>
-<span class="n">results_dict</span> <span class="o">=</span> <span class="n">parse_noaa</span><span class="o">.</span><span class="n">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">results_dict</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
 <p>The result:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>   <span class="s1">&#39;air_temperature_observation_air_temperature&#39;</span><span class="p">:</span> <span class="mf">24.2</span><span class="p">,</span>
    <span class="s1">&#39;air_temperature_observation_air_temperature_quality_code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
@@ -150,11 +137,13 @@ Just understand the parser converts the fixed-format into a Python dictionary.</
 <li class="toctree-l1"><a class="reference internal" href="lesson2_16.html">Run X2GO: Putting in Password</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson2_17.html">Configure Image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3.html">Lesson 3: Map/Reduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson3_1_5.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_2.html">Simple word Count Non Big Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_3.html">Map/Reduce Word Count Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_4.html">Executing Example with Bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson3_5.html">Simple word count with Hadoop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson4.html">Introduction to NOAA Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson4_1_5.html">Preliminaries</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">NOAA Format</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction-to-the-noaa-fixed-character-format">Introduction to the NOAA fixed character format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-parsers">Using Parsers</a></li>
@@ -176,6 +165,7 @@ Just understand the parser converts the fixed-format into a Python dictionary.</
 <li class="toctree-l1"><a class="reference internal" href="lesson5_10.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_11.html">Input/Output (2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_12.html">A Short Intro to Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson5_12_2.html">A Short Intro to Lazy Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson5_13.html">A Short Intro to Lazy Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6.html">Lesson 6 Introduction to Spark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson6_2.html">Architecture of Spark</a></li>
@@ -212,6 +202,14 @@ Just understand the parser converts the fixed-format into a Python dictionary.</
 <li class="toctree-l1"><a class="reference internal" href="lesson8_6.html">Executing SQL on a Dataframe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_7.html">Average Temperature for each State with a Dataframe using SQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson8_8.html">Anatomy of Dataframes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9.html">Spark Data Frames Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_2.html">Download the files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_3.html">Install the correct Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_4.html">Read in a Different File Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_5.html">Create a Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_6.html">Manipulate Columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_7.html">Using SQL in Spark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson9_8.html">Writing the resuls</a></li>
 </ul>
 
           <div role="search">
@@ -232,7 +230,7 @@ Just understand the parser converts the fixed-format into a Python dictionary.</
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
-            <a href="lesson4.html" title="Introduction to NOAA Dataset"
+            <a href="lesson4_1_5.html" title="Preliminaries"
               >previous</a> |
             <a href="lesson4_3.html" title="Using Map Reduce to find the average tempeartures for each state"
               >next</a> |
