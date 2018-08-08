@@ -9,3 +9,4 @@ python3 setup.py install --user
 sudo python34 setup.py install 
 #sudo pip-3.4 install boto3
 pip-3.4 install boto3 --user
+cd ~/

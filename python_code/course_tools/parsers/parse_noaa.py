@@ -32,7 +32,7 @@ def _field_with_divide_factor(line, start, stop, scale, required = True):
     assert isinstance(scale, int), "scale must be int"
     x = get_signed_int_field(line, start, stop, required)
     if x == 0:
-        return x
+        return float(x)
     if x:
         return x/float(scale)
 

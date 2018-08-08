@@ -1,6 +1,6 @@
 import datetime
 import boto3
-session = boto3.Session(profile_name='admin')
+session = boto3.Session(profile_name='default')
 client = session.client('emr')
 
 def make_instances():
@@ -28,7 +28,7 @@ def make_instances():
            'Market': 'SPOT',
            'BidPrice': '.6',
            'InstanceType': 'm3.xlarge',
-           'InstanceCount': 2,
+           'InstanceCount': 1,
            'Configurations': [
                {"Classification":"emrfs-site",
                "Properties":{"fs.s3.consistent.retryPeriodSeconds":"10",

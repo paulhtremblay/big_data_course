@@ -68,4 +68,4 @@ file system, and preserve the schema as well.
 
 
 
-<< :ref:`lesson9_7`  >>
+<< :ref:`lesson9_7` | :ref:`lesson10`  >>

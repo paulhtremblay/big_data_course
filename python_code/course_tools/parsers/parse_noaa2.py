@@ -1,3 +1,5 @@
+import pprint
+pp = pprint.PrettyPrinter(indent = 4)
 import csv
 import datetime
 STATE_DICT = {
@@ -5249,10 +5251,10 @@ def get_str_field(line, start, stop, required=True):
 def _field_with_divide_factor(line, start, stop, scale, required = True):
     assert isinstance(scale, int), "scale must be int"
     x = get_signed_int_field(line, start, stop, required)
-    if x == 0:
+    if x == float(0):
         return x
     if x:
-        return x/float(scale)
+        return float(x/float(scale))
 
 def get_temp(line, start, stop, required = True):
     t =  _field_with_divide_factor(line, start, stop, 10, required)
@@ -5270,7 +5272,7 @@ def get_air_pressure(line, start, stop, required = True):
     return _field_with_divide_factor(line, start, stop, 10, required)
 
 def get_geo_coord(line, start, stop, required = True):
-    return _field_with_divide_factor(line, start, stop, 1000, required)
+    return float(_field_with_divide_factor(line, start, stop, 1000, required))
 
 def get_signed_int_field(line, start, stop, required = True):
     if _check_valid_length(line, start, stop, required):
@@ -5294,9 +5296,9 @@ def get_county(info_dict, counties_dict, line):
 def parse_line_(line):
     return (line, len(line))
 
-def parse_line(line):
-    state_dict = get_state_dict()
-    counties_dict = get_counties_dict()
+def parse_line(line, state_dict, counties_dict):
+    #state_dict = get_state_dict()
+    #counties_dict = get_counties_dict()
     d =    {
         'total_variable_characters':get_int_field(line, 1, 4),
         'fixed_weather_station_usaf_master_station_catalog_identifier':get_str_field(line, 5, 10),
@@ -5361,3 +5363,7 @@ def parse_line(line):
     d['county'] = get_county(d, counties_dict, line)
     return d
 
+if __name__ == '__main__':
+    d = get_counties_dict()
+    for key in d.keys():
+        print('{key},{value}'.format(key =key , value = d[key]))

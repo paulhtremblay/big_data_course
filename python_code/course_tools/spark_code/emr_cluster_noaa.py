@@ -28,7 +28,7 @@ def make_instances():
            'Market': 'SPOT',
            'BidPrice': '.6',
            'InstanceType': 'm3.xlarge',
-           'InstanceCount': 2,
+           'InstanceCount': 15,
            'Configurations': [
                {"Classification":"emrfs-site",
                "Properties":{"fs.s3.consistent.retryPeriodSeconds":"10",
